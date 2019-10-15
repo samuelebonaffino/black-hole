@@ -1,8 +1,8 @@
-var w = 800;
-var h = 400;
+var w = 500;
+var h = 700;
 var bh = new BlackHole(w/2, h/2, 200);
 var particles = [];
-var N = 400;
+var N = 200;
 
 function setup()
 {
@@ -13,7 +13,7 @@ function setup()
 
 function draw()
 {
-    background(7);
+    background(15);
     for(let i = 0; i < particles.length; i++)
     {
         fill(255);
@@ -24,9 +24,9 @@ function draw()
             particles.splice(i, 1);
         p.step(bh);
     }
+    bh.move();
     bh.draw();
     updateParticles();
-    bh.move();
 }
 
 function updateParticles()

@@ -22,9 +22,9 @@ class Particle
         let dy = bh.y - this.y;
         let theta = atan2(dx, dy);
         let r = sqrt(dx * dx + dy * dy);
-        if(r < bh.rs)
+        if(r < bh.R)
             this.remove = true;
-        this.fg = (1.4 * bh.G * bh.M * this.mass) / (r * r);
+        this.fg = (bh.G * bh.M * this.mass) / (r * r);
 
         let fgx_G = this.fg * cos(theta);
         let fgy_G = this.fg * sin(theta);
@@ -32,6 +32,6 @@ class Particle
         let fgy = this.fg * cos(theta);
 
         this.x += fgx + fgx_G;
-        this.y += + fgy - fgy_G;
+        this.y += fgy - fgy_G;
     }
 }
