@@ -1,3 +1,5 @@
+let fg = 1;
+
 class Particle
 {
     constructor()
@@ -11,27 +13,35 @@ class Particle
         this.fade = 0.001;
         this.dir = random(0, TWO_PI);
         this.remove = false;
-        this.fg = 1;
     }
 
     step(bh)
     {
-        angleMode(RADIANS);
         this.alpha -= this.fade;
         let dx = bh.x - this.x;
         let dy = bh.y - this.y;
         let theta = atan2(dx, dy);
         let r = sqrt(dx * dx + dy * dy);
+
         if(r < bh.R)
             this.remove = true;
-        this.fg = (bh.G * bh.M * this.mass) / (r * r);
 
-        let fgx_G = this.fg * cos(theta);
-        let fgy_G = this.fg * sin(theta);
-        let fgx = this.fg * sin(theta);
-        let fgy = this.fg * cos(theta);
+        fg = (bh.G * bh.M * this.mass) / (r * r);
+
+        let fgx_G = 100 * fg * cos(theta);
+        let fgy_G = 100 * fg * sin(theta);
+        let fgx = fg * sin(theta);
+        let fgy = fg * cos(theta);
 
         this.x += fgx + fgx_G;
-        this.y += fgy - fgy_G;
+        this.y += - fgy - fgy_G;
+    }
+
+    wrap(min)
+    {
+        if(this.x < min)                this.x = innerWidth - min;
+        if(this.y < min)                this.y = innerHeight - min;
+        if(this.x > innerWidth - min)   this.x = min;   
+        if(this.y > innerHeight - min)  this.y = min;
     }
 }

@@ -1,3 +1,5 @@
+var stop = true;
+
 class BlackHole
 {
     constructor(x, y, M)
@@ -17,13 +19,17 @@ class BlackHole
         this.M = (this.rs * c * c) / (2 * G);
     }
 
+    followMouse()
+    {
+        stop = !stop;
+    }
+
     move()
     {
-        let d = dist(mouseX, mouseY, this.x, this.y);
-        if(d > 10 && d < 300)
+        if(!stop)
         {
-            this.x += (mouseX - this.x) / 20;
-            this.y += (mouseY - this.y) / 20;
+            this.x += (mouseX - this.x) / 50;
+            this.y += (mouseY - this.y) / 50;
         }
     }
     
@@ -33,5 +39,11 @@ class BlackHole
         strokeWeight(2);
         noStroke();
         circle(this.x, this.y, this.R);
+    }
+
+    resetPosition()
+    {
+        this.x = innerWidth / 2;
+        this.y = innerHeight / 2;
     }
 }
