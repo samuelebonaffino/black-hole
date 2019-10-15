@@ -26,4 +26,12 @@ class BlackHole
             this.y += (mouseY - this.y) / 20;
         }
     }
+    
+    draw()
+    {
+        fill(0);
+        strokeWeight(2);
+        noStroke();
+        circle(this.x, this.y, this.R);
+    }
 }

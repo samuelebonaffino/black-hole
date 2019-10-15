@@ -1,5 +1,5 @@
-var w = 500;
-var h = 800;
+var w = 800;
+var h = 400;
 var bh = new BlackHole(w/2, h/2, 200);
 var particles = [];
 var N = 400;
@@ -9,19 +9,6 @@ function setup()
     createCanvas(w, h);
     for(let i = 0; i < N; i++)
         particles.push(new Particle);
-}
-
-function updateParticles()
-{
-    while(particles.length < N)
-    particles.push(new Particle);
-}
-function drawBlackHole()
-{
-    fill(0);
-    strokeWeight(2);
-    noStroke();
-    circle(bh.x, bh.y, bh.R);
 }
 
 function draw()
@@ -37,7 +24,13 @@ function draw()
             particles.splice(i, 1);
         p.step(bh);
     }
-    drawBlackHole();
+    bh.draw();
     updateParticles();
     bh.move();
+}
+
+function updateParticles()
+{
+    while(particles.length < N)
+        particles.push(new Particle);
 }

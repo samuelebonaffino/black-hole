@@ -5,7 +5,7 @@ class Particle
         this.x = random(0, width);
         this.y = random(0, height);
         this.color = fill(255);
-        this.radius = random(0.3, 1);
+        this.radius = random(0.5, 2);
         this.mass = 2 * this.radius;
         this.alpha = random(0.5, 0.95);
         this.fade = 0.001;
