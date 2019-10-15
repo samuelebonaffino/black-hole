@@ -7,7 +7,7 @@ class Particle
         this.x = random(0, width);
         this.y = random(0, height);
         this.color = fill(255);
-        this.radius = random(0.5, 2);
+        this.radius = random(0.5, 3);
         this.mass = 2 * this.radius;
         this.alpha = random(0.5, 0.95);
         this.fade = 0.001;
@@ -28,13 +28,13 @@ class Particle
 
         fg = (bh.G * bh.M * this.mass) / (r * r);
 
-        let fgx_G = 100 * fg * cos(theta);
-        let fgy_G = 100 * fg * sin(theta);
+        let fgx_G = 10 * fg * cos(theta);
+        let fgy_G = 10 * fg * sin(theta);
         let fgx = fg * sin(theta);
         let fgy = fg * cos(theta);
 
         this.x += fgx + fgx_G;
-        this.y += - fgy - fgy_G;
+        this.y += fgy - fgy_G;
     }
 
     wrap(min)
