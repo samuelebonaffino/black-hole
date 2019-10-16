@@ -37,11 +37,7 @@ function mousePressed()
 
 function keyTyped() 
 {
-<<<<<<< HEAD
-    if(key == 's') 
-=======
     if(key == 'f') 
->>>>>>> refs/remotes/origin/gh-pages
     {
         let fs = fullscreen();
         fullscreen(!fs);
