@@ -2,7 +2,7 @@ var w = innerWidth;
 var h = innerHeight;
 var bh = new BlackHole(w/2, h/2, 200);
 var particles = [];
-var N = 400;
+var N = 2000;
 
 function setup()
 {
@@ -13,7 +13,7 @@ function setup()
 
 function draw()
 {
-    background(30);
+    background(3);
     for(let i = 0; i < particles.length; i++)
     {
         fill(255);
