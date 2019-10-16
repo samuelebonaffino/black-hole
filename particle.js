@@ -28,8 +28,8 @@ class Particle
 
         fg = (bh.G * bh.M * this.mass) / (r * r);
 
-        let fgx_G = 10 * fg * cos(theta);
-        let fgy_G = 10 * fg * sin(theta);
+        let fgx_G = fg * cos(theta);
+        let fgy_G = fg * sin(theta);
         let fgx = fg * sin(theta);
         let fgy = fg * cos(theta);
 
