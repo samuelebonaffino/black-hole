@@ -2,7 +2,7 @@ var w = innerWidth;
 var h = innerHeight;
 var bh = new BlackHole(w/2, h/2, 200);
 var particles = [];
-var N = 2400;
+var N = 400;
 
 function setup()
 {
@@ -13,7 +13,7 @@ function setup()
 
 function draw()
 {
-    background(3);
+    background(30);
     for(let i = 0; i < particles.length; i++)
     {
         fill(255);
@@ -32,17 +32,16 @@ function draw()
 
 function mousePressed() 
 {
-    if (mouseX > 0 && mouseX < 100 && mouseY > 0 && mouseY < 100) 
-    {
-      let fs = fullscreen();
-      fullscreen(!fs);
-    }
+    bh.followMouse();
 }
 
 function keyTyped() 
 {
-    if(key == 's') 
-        bh.followMouse();
+    if(key == 'f') 
+    {
+        let fs = fullscreen();
+        fullscreen(!fs);
+    }
 }
 
 function updateParticles()
