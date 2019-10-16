@@ -32,17 +32,16 @@ function draw()
 
 function mousePressed() 
 {
-    if (mouseX > 0 && mouseX < 100 && mouseY > 0 && mouseY < 100) 
-    {
-      let fs = fullscreen();
-      fullscreen(!fs);
-    }
+    bh.followMouse();
 }
 
 function keyTyped() 
 {
     if(key == 's') 
-        bh.followMouse();
+    {
+        let fs = fullscreen();
+        fullscreen(!fs);
+    }
 }
 
 function updateParticles()
