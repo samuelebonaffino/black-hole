@@ -1,17 +1,18 @@
-var stop = true;
+let edgeD = 30;
 
 class BlackHole
 {
-    constructor(x, y, M)
+    constructor(w, h, M)
     {
-        this.x = x;
-        this.y = y;
+        this.x = random(edgeD, w - edgeD);
+        this.y = random(edgeD, h - edgeD);
         this.M = M;
-        this.G = 100;
+        this.G = 500;
         this.c = 50;
         this.rs = (2 * this.G * M) / (this.c * this.c);
         this.rPhoton = 2.6 * this.rs;
-        this.R = 3 * this.rs;
+        this.R = M;
+        this.stop = true;
     }
 
     update()
@@ -19,14 +20,9 @@ class BlackHole
         this.M = (this.rs * c * c) / (2 * G);
     }
 
-    followMouse()
-    {
-        stop = !stop;
-    }
-
     move()
     {
-        if(!stop)
+        if(!this.stop)
         {
             this.x += (mouseX - this.x) / 50;
             this.y += (mouseY - this.y) / 50;
@@ -36,14 +32,23 @@ class BlackHole
     draw()
     {
         fill(0);
-        strokeWeight(2);
-        noStroke();
-        circle(this.x, this.y, this.R);
+        circle(this.x, this.y, this.rs);
+    }
+
+    followMouse()
+    {
+        this.stop = !this.stop;
+    }
+
+    isSelected()
+    {
+        let d = dist(this.x, this.y, mouseX, mouseY);
+        return d < this.R + 10;
     }
 
     resetPosition()
     {
-        this.x = innerWidth / 2;
-        this.y = innerHeight / 2;
+        this.x = random(edgeD, innerWidth - edgeD);
+        this.y = random(edgeD, innerHeight - edgeD);
     }
 }

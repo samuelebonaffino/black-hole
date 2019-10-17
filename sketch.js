@@ -1,38 +1,55 @@
 var w = innerWidth;
 var h = innerHeight;
-var bh = new BlackHole(w/2, h/2, 200);
+var bgColor = 3;
+
+var blackHolesN = 2;
+var particlesN = 2000;
+var bh = [];
 var particles = [];
-var N = 2000;
 
 function setup()
 {
     createCanvas(w, h);
-    for(let i = 0; i < N; i++)
+    background(bgColor);
+    for(let i = 0; i < particlesN; i++)
         particles.push(new Particle);
+    for(i = 0; i < blackHolesN; i++)
+        bh.push(new BlackHole(w, h, random(10, 100)));
 }
 
 function draw()
 {
-    background(3);
+    background(bgColor);
+    fill(255);
+    noStroke();
     for(let i = 0; i < particles.length; i++)
     {
-        fill(255);
-        noStroke();     
         let p = particles[i];
         circle(p.x, p.y, p.radius);
-        if(p.remove)
-            particles.splice(i, 1);
         p.step(bh);
-        p.wrap(10);
+        // if(p.remove)
+        //     particles.splice(i, 1);
+        // else
+        // {
+        //   //fill(p.color);
+             //circle(p.x, p.y, p.radius);
+             //p.step(bh);
+        // }
+        //fill(p.color);
     }
-    bh.move();
-    bh.draw();
-    updateParticles();
+    for(i = 0; i < bh.length; i++)
+    {
+        bh[i].move();
+        bh[i].draw();
+    }
+    //updateParticles(particlesN);
 }
 
-function mousePressed() 
+function mousePressed()
 {
-    bh.followMouse();
+    for(let i = 0; i < bh.length; i++)
+        if(bh[i].isSelected())
+            bh[i].followMouse();
 }
 
 function keyTyped() 
@@ -42,16 +59,23 @@ function keyTyped()
         let fs = fullscreen();
         fullscreen(!fs);
     }
-}
-
-function updateParticles()
-{
-    while(particles.length < N)
-        particles.push(new Particle);
+    else if(key == 'w')
+    {
+        background(bgColor);
+        bh.push(new BlackHole(w, h, random(10, 100)));
+    }
+    else if(key == 's')
+    {
+        background(bgColor);
+        bh.pop();
+    }
 }
 
 function windowResized()
 {
-    resizeCanvas(innerWidth, innerHeight, false);
-    bh.resetPosition();
+    w = innerWidth;
+    h = innerHeight;
+    resizeCanvas(w, h, false);
+    for(let i = 0; i < bh.length; i++)
+        bh[i].resetPosition();
 }
