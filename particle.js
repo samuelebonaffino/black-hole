@@ -6,10 +6,10 @@ class Particle
         this.y = random(0, height);
         //this.color = color(random(0, 255), random(0, 255), random(0, 255));
         this.color = color(255);
-        this.radius = random(0.5, 3);
+        this.radius = random(0.5, 5);
         this.mass = 2 * this.radius;
         this.alpha = 255;
-        this.fade = random(0.5, 5);
+        this.fade = random(0.005, 0.01);
         this.dir = random(0, TWO_PI);
         this.remove = false;
     }
@@ -22,18 +22,18 @@ class Particle
 
     toRemove(r, bh)
     {
-        if(r < bh.rs || this.alpha <= 20)
+        if(r < bh.rs + 10 || this.alpha <= 20)
                 this.remove = true;
     }
 
     step(bh)
     {
-        //this.fading();
+        this.fading();
         let fg = 0;
-        let fgx_G = 0;
-        let fgy_G = 0;
-        let fgx = 0;
-        let fgy = 0;
+        let fgX = 0;
+        let fgY = 0;
+        let motionX = 0;
+        let motionY = 0;
 
         for(let i = 0; i < bh.length; i++)
         {
@@ -47,16 +47,16 @@ class Particle
             // Not the actual formula
             fg = (bh[i].G * bh[i].M) / (r * r * this.mass);
 
-            fgx_G += 30 * fg * cos(theta);
-            fgy_G += 10 * fg * sin(theta);
-            fgx += fg * sin(theta);
-            fgy += fg * cos(theta);
+            fgX     += fgxMul * fg * cos(theta);
+            fgY     += fgyMul * fg * sin(theta);
+            motionX += fg * sin(theta);
+            motionY += fg * cos(theta);
         }
 
-        this.x += fgx + fgx_G;
-        this.y += fgy - fgy_G;
+        this.x += motionX + fgX;
+        this.y += motionY - fgY;
 
-        //this.wrap(30);
+        //this.wrap(0);
     }
 
     wrap(min)

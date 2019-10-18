@@ -28,7 +28,7 @@ class BlackHole
             this.y += (mouseY - this.y) / 50;
         }
     }
-    
+
     draw()
     {
         fill(0);

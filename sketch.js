@@ -1,11 +1,15 @@
 var w = innerWidth;
 var h = innerHeight;
-var bgColor = 3;
+var bgColor = 5;
 
 var blackHolesN = 2;
-var particlesN = 2000;
+var particlesN = 5000;
 var bh = [];
 var particles = [];
+
+// Particles motion
+var fgxMul = 10;
+var fgyMul = 10;
 
 function setup()
 {
@@ -25,24 +29,21 @@ function draw()
     for(let i = 0; i < particles.length; i++)
     {
         let p = particles[i];
-        circle(p.x, p.y, p.radius);
-        p.step(bh);
-        // if(p.remove)
-        //     particles.splice(i, 1);
-        // else
-        // {
-        //   //fill(p.color);
-             //circle(p.x, p.y, p.radius);
-             //p.step(bh);
-        // }
-        //fill(p.color);
+        if(p.remove)
+            particles.splice(i, 1);
+        else
+        {
+            fill(p.color);
+            circle(p.x, p.y, p.radius);
+            p.step(bh);
+        }
     }
     for(i = 0; i < bh.length; i++)
     {
         bh[i].move();
         bh[i].draw();
     }
-    //updateParticles(particlesN);
+    updateParticles(particlesN);
 }
 
 function mousePressed()
@@ -69,6 +70,19 @@ function keyTyped()
         background(bgColor);
         bh.pop();
     }
+}
+
+function keyPressed()
+{
+    if(keyCode == UP_ARROW)
+        fgyMul += 10;
+    else if(keyCode == DOWN_ARROW)
+        fgyMul -= 10;
+
+    if(keyCode == RIGHT_ARROW)
+        fgxMul += 10;
+    else if(keyCode == LEFT_ARROW)
+        fgxMul -= 10;
 }
 
 function windowResized()
