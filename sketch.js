@@ -3,7 +3,7 @@ var h = innerHeight;
 var bgColor = 5;
 
 var blackHolesN = 2;
-var particlesN = 5000;
+var particlesN = 2000;
 var bh = [];
 var particles = [];
 
