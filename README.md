@@ -3,7 +3,7 @@ If you want to have a look at the current state of the project, check this link:
 
 
 # DESCRIPTION
-I want to point out immediatly that this project has not the purpose to realize something even near to an accurate simulation of the phenomena, at least not at the beginning. At the moment, my intention is to create a good looking visualization and give the possibility to play around with values in order to make it more interactive, obtaining interesting visual results.
+I want to point out immediatly that this project has not the purpose to realize something even near to an accurate simulation of the phenomenon. My intention is to create a good looking visualization and give the possibility to play around with values in order to make it more interactive, obtaining interesting visual results.
 
 
 # GENERAL INFORMATION
